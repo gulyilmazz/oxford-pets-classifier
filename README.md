@@ -43,7 +43,7 @@ Bu projede Oxford-IIIT Pet dataset üzerinde transfer learning ile farklı model
 Web arayüzünde bir pet resmi yüklendiğinde, modelin tahmini ve top-3 tahmini tablo halinde ve görsel olarak vurgulanmış şekilde kullanıcıya sunulur. 
 Aşağıda, arayüzdeki tahmin sonucunun ve top-3 tahmin tablosunun örnek bir ekran görüntüsünü bulabilirsiniz.
 
-image.png
+![Web arayüzü örneği](image.png)
 
 ---
 
@@ -67,18 +67,3 @@ image.png
    python app_gradio.py
    ```
 
----
-
-## İlerleme ve Öneriler
-- Daha fazla epoch ve data augmentation ile doğruluk artırılabilir.
-- Modelin eğitim ve test sonuçlarını confusion matrix ile analiz et.
-- En iyi modeli kaydedip, tek görselle test et.
-- Web arayüzünü özelleştirerek daha profesyonel bir kullanıcı deneyimi sunabilirsin.
-
----
-
-## Sonuç
-Bu proje, transfer learning modellerinin karşılaştırılması, production için optimize edilmiş bir pipeline ve modern web arayüzü ile gerçek hayata uygun bir pet sınıflandırıcı örneğidir. Daha iyi sonuçlar için veri ön işleme, augmentation ve hiperparametre optimizasyonu yapılmalıdır. 
-=======
-# oxford-pets-classifier
->>>>>>> 24551bcc2b1b08aa23970959df6f86f48de86a1f
