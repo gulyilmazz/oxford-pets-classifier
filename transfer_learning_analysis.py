@@ -8,7 +8,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 import time
 
 # ===== DATASET YÜKLEME VE HAZIRLAMA =====
-print("🔍 Oxford-IIIT Pet Dataset Analizi Başlıyor...")
+print("Oxford-IIIT Pet Dataset Analizi Başlıyor...")
 print("=" * 50)
 
 # Dataset yolları
@@ -29,13 +29,13 @@ class_names = [
     'Yorkshire_terrier'
 ]
 
-print(f"📊 Toplam Sınıf Sayısı: {len(class_names)}")
-print(f"🐱 Kedi Türleri: {len([c for c in class_names if c in ['Abyssinian', 'Bengal', 'Birman', 'Bombay', 'British_shorthair', 'Egyptian_mau', 'Maine_coon', 'Persian', 'Ragdoll', 'Russian_blue', 'Siamese', 'Sphynx']])}")
-print(f"🐕 Köpek Türleri: {len([c for c in class_names if c not in ['Abyssinian', 'Bengal', 'Birman', 'Bombay', 'British_shorthair', 'Egyptian_mau', 'Maine_coon', 'Persian', 'Ragdoll', 'Russian_blue', 'Siamese', 'Sphynx']])}")
+print(f"Toplam Sınıf Sayısı: {len(class_names)}")
+print(f"Kedi Türleri: {len([c for c in class_names if c in ['Abyssinian', 'Bengal', 'Birman', 'Bombay', 'British_shorthair', 'Egyptian_mau', 'Maine_coon', 'Persian', 'Ragdoll', 'Russian_blue', 'Siamese', 'Sphynx']])}")
+print(f"Köpek Türleri: {len([c for c in class_names if c not in ['Abyssinian', 'Bengal', 'Birman', 'Bombay', 'British_shorthair', 'Egyptian_mau', 'Maine_coon', 'Persian', 'Ragdoll', 'Russian_blue', 'Siamese', 'Sphynx']])}")
 
 def load_and_preprocess_dataset():
     """Dataset'i yükle ve ön işle"""
-    print("\n📁 Dataset yükleniyor...")
+    print("\n Dataset yükleniyor...")
     
     images = []
     labels = []
@@ -60,12 +60,12 @@ def load_and_preprocess_dataset():
     images = np.array(images)
     labels = np.array(labels)
     
-    print(f"✅ Dataset yüklendi: {len(images)} resim, {len(np.unique(labels))} sınıf")
+    print(f"Dataset yüklendi: {len(images)} resim, {len(np.unique(labels))} sınıf")
     return images, labels
 
 def create_tf_dataset(images, labels, train_split=0.8):
     """TensorFlow dataset oluştur (shuffle ve stratified split ile)"""
-    print("\n🔄 TensorFlow Dataset oluşturuluyor...")
+    print("\nTensorFlow Dataset oluşturuluyor...")
     
     # Stratified split
     from sklearn.model_selection import StratifiedShuffleSplit
@@ -80,7 +80,7 @@ def create_tf_dataset(images, labels, train_split=0.8):
     
     train_ds = tf.data.Dataset.from_tensor_slices((train_images, train_labels))
     train_ds = train_ds.map(preprocess_image, num_parallel_calls=AUTOTUNE)
-    train_ds = train_ds.shuffle(1000)
+    train_ds = train_ds.shuffle(1000)  #
     train_ds = train_ds.batch(BATCH_SIZE)
     train_ds = train_ds.prefetch(AUTOTUNE)
     
@@ -89,7 +89,7 @@ def create_tf_dataset(images, labels, train_split=0.8):
     test_ds = test_ds.batch(BATCH_SIZE)
     test_ds = test_ds.prefetch(AUTOTUNE)
     
-    print(f"✅ Train: {len(train_images)}, Test: {len(test_images)}")
+    print(f"Train: {len(train_images)}, Test: {len(test_images)}")
     return train_ds, test_ds
 
 # ===== FARKLI TRANSFER LEARNING MODELLERİ =====
@@ -147,7 +147,7 @@ def create_model(base_model_name, num_classes=37):
 
 def train_and_evaluate_model(model, model_name, train_ds, test_ds, epochs=30):
     """Modeli eğit ve değerlendir (daha fazla epoch, düşük learning rate)"""
-    print(f"\n🚀 {model_name} eğitimi başlıyor...")
+    print(f"\n {model_name} eğitimi başlıyor...")
     
     # Model derleme
     model.compile(
@@ -175,7 +175,7 @@ def train_and_evaluate_model(model, model_name, train_ds, test_ds, epochs=30):
     # Model boyutu
     model_size = model.count_params()
     
-    print(f"✅ {model_name} eğitimi tamamlandı!")
+    print(f"{model_name} eğitimi tamamlandı!")
     print(f"   - Test Doğruluğu: {test_accuracy*100:.2f}%")
     print(f"   - Eğitim Süresi: {training_time:.2f} saniye")
     print(f"   - Model Boyutu: {model_size:,} parametre")
@@ -202,11 +202,11 @@ def main():
     results = {}
     
     print("\n" + "="*60)
-    print("🎯 TRANSFER LEARNING MODEL KARŞILAŞTIRMASI")
+    print("TRANSFER LEARNING MODEL KARŞILAŞTIRMASI")
     print("="*60)
     
     for model_name in models_to_test:
-        print(f"\n📊 {model_name} analizi...")
+        print(f"\n{model_name} analizi...")
         
         # Model oluştur
         model, model_type = create_model(model_name)
@@ -221,11 +221,11 @@ def main():
         
         # Modeli kaydet
         model.save(f"oxford_pets_{model_name.lower()}.h5")
-        print(f"   💾 Model kaydedildi: oxford_pets_{model_name.lower()}.h5")
+        print(f"Model kaydedildi: oxford_pets_{model_name.lower()}.h5")
     
     # ===== SONUÇLARI KARŞILAŞTIR =====
     print("\n" + "="*60)
-    print("📈 KARŞILAŞTIRMA SONUÇLARI")
+    print("KARŞILAŞTIRMA SONUÇLARI")
     print("="*60)
     
     comparison_data = []
@@ -239,24 +239,24 @@ def main():
     
     # Sonuçları tablo halinde göster
     for data in comparison_data:
-        print(f"🔸 {data['Model']:15} | "
+        print(f"{data['Model']:15} | "
               f"Doğruluk: {data['Doğruluk (%)']:6.2f}% | "
               f"Süre: {data['Eğitim Süresi (s)']:6.2f}s | "
               f"Parametre: {data['Parametre Sayısı']:8,}")
     
     # En iyi modeli belirle
     best_model = max(results.items(), key=lambda x: x[1]['test_accuracy'])
-    print(f"\n🏆 EN İYİ MODEL: {best_model[0]}")
+    print(f"\nEN İYİ MODEL: {best_model[0]}")
     print(f"   Doğruluk: {best_model[1]['test_accuracy']*100:.2f}%")
     
     # Production için öneriler
     print("\n" + "="*60)
-    print("💡 PRODUCTION ÖNERİLERİ")
+    print("PRODUCTION ÖNERİLERİ")
     print("="*60)
-    print("🔸 Mobil Uygulama: MobileNetV2 (hızlı, küçük)")
-    print("🔸 Web Uygulaması: EfficientNetB0 (denge)")
-    print("🔸 Yüksek Doğruluk: ResNet50 (güçlü)")
-    print("🔸 Klasik Yaklaşım: VGG16 (güvenilir)")
+    print("Mobil Uygulama: MobileNetV2 (hızlı, küçük)")
+    print("Web Uygulaması: EfficientNetB0 (denge)")
+    print("Yüksek Doğruluk: ResNet50 (güçlü)")
+    print("Klasik Yaklaşım: VGG16 (güvenilir)")
     
     return results
 

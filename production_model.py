@@ -67,7 +67,7 @@ class OxfordPetsClassifier:
         
     def create_base_model(self):
         """Base model oluştur"""
-        print(f"🏗️ {self.model_name} base model oluşturuluyor...")
+        print(f"{self.model_name} base model oluşturuluyor...")
         
         if self.model_name == "EfficientNetB0":
             base_model = tf.keras.applications.EfficientNetB0(
@@ -104,10 +104,10 @@ class OxfordPetsClassifier:
             base_model.trainable = True
             for layer in base_model.layers[:-10]:
                 layer.trainable = False
-            print("   ✅ Fine-tuning aktif")
+            print("Fine-tuning aktif")
         else:
             base_model.trainable = False
-            print("   ✅ Base model donduruldu")
+            print("Base model donduruldu")
         
         # Production-ready model mimarisi
         self.model = tf.keras.Sequential([
@@ -134,12 +134,12 @@ class OxfordPetsClassifier:
             tf.keras.layers.Dense(self.num_classes, activation='softmax')
         ])
         
-        print(f"   ✅ Model oluşturuldu: {self.model.count_params():,} parametre")
+        print(f"Model oluşturuldu: {self.model.count_params():,} parametre")
         return self.model
     
     def create_data_generators(self, train_dir, val_dir, batch_size=32):
         """Data augmentation ile data generator'lar oluştur"""
-        print("🔄 Data augmentation ile data generator'lar oluşturuluyor...")
+        print("Data augmentation ile data generator'lar oluşturuluyor...")
         
         # Training için data augmentation
         train_datagen = ImageDataGenerator(
@@ -174,14 +174,14 @@ class OxfordPetsClassifier:
             shuffle=False
         )
         
-        print(f"   ✅ Train: {train_generator.samples} örnek")
-        print(f"   ✅ Validation: {val_generator.samples} örnek")
+        print(f"Train: {train_generator.samples} örnek")
+        print(f"Validation: {val_generator.samples} örnek")
         
         return train_generator, val_generator
     
     def compile_model(self, learning_rate=0.001):
         """Model derleme"""
-        print("⚙️ Model derleniyor...")
+        print("Model derleniyor...")
         
         optimizer = Adam(learning_rate=learning_rate)
         
@@ -191,10 +191,10 @@ class OxfordPetsClassifier:
             metrics=['accuracy', tf.keras.metrics.SparseTopKCategoricalAccuracy(k=3, name='top_3_accuracy')]
         )
         
-        print(f"   ✅ Learning rate: {learning_rate}")
-        print("   ✅ Optimizer: Adam")
-        print("   ✅ Loss: Sparse Categorical Crossentropy")
-        print("   ✅ Metrics: Accuracy, Top-3 Accuracy")
+        print(f" Learning rate: {learning_rate}")
+        print("  Optimizer: Adam")
+        print("  Loss: Sparse Categorical Crossentropy")
+        print("  Metrics: Accuracy, Top-3 Accuracy")
     
     def create_callbacks(self, model_save_path):
         """Training callback'leri oluştur"""
@@ -226,7 +226,7 @@ class OxfordPetsClassifier:
             )
         ]
         
-        print("   ✅ Callbacks oluşturuldu:")
+        print("   Callbacks oluşturuldu:")
         print("      - Early Stopping (patience=10)")
         print("      - Reduce LR on Plateau")
         print("      - Model Checkpoint")
@@ -235,10 +235,10 @@ class OxfordPetsClassifier:
     
     def train(self, train_generator, val_generator, epochs=50, fine_tune_epochs=10):
         """İki aşamalı eğitim: Transfer Learning + Fine-tuning"""
-        print("\n🚀 İki aşamalı eğitim başlıyor...")
+        print("\nİki aşamalı eğitim başlıyor...")
         
         # Aşama 1: Transfer Learning
-        print("\n📚 AŞAMA 1: Transfer Learning")
+        print("\n AŞAMA 1: Transfer Learning")
         print("=" * 40)
         
         start_time = time.time()
@@ -256,7 +256,7 @@ class OxfordPetsClassifier:
         )
         
         # Aşama 2: Fine-tuning
-        print("\n🔧 AŞAMA 2: Fine-tuning")
+        print("\n AŞAMA 2: Fine-tuning")
         print("=" * 40)
         
         # Base model'i eğitilebilir yap
@@ -280,23 +280,23 @@ class OxfordPetsClassifier:
         
         self.training_time = time.time() - start_time
         
-        print(f"\n✅ Eğitim tamamlandı!")
+        print(f"\n Eğitim tamamlandı!")
         print(f"   - Toplam süre: {self.training_time/60:.2f} dakika")
         print(f"   - Transfer Learning: {len(self.history.history['accuracy'])} epoch")
         print(f"   - Fine-tuning: {len(fine_tune_history.history['accuracy'])} epoch")
     
     def evaluate_model(self, test_generator):
         """Model değerlendirme"""
-        print("\n📊 Model değerlendiriliyor...")
+        print("\n Model değerlendiriliyor...")
         
         # Test performansı
         test_loss, test_accuracy, test_top3_accuracy = self.model.evaluate(
             test_generator, verbose=0
         )
         
-        print(f"   ✅ Test Accuracy: {test_accuracy*100:.2f}%")
-        print(f"   ✅ Test Top-3 Accuracy: {test_top3_accuracy*100:.2f}%")
-        print(f"   ✅ Test Loss: {test_loss:.4f}")
+        print(f"   Test Accuracy: {test_accuracy*100:.2f}%")
+        print(f"   Test Top-3 Accuracy: {test_top3_accuracy*100:.2f}%")
+        print(f"   Test Loss: {test_loss:.4f}")
         
         # Detaylı analiz
         predictions = self.model.predict(test_generator)
@@ -326,7 +326,7 @@ class OxfordPetsClassifier:
     
     def save_model(self, model_path="production_model.h5"):
         """Model ve metadata kaydet"""
-        print(f"\n💾 Model kaydediliyor: {model_path}")
+        print(f"\n Model kaydediliyor: {model_path}")
         
         # Model kaydet
         self.model.save(model_path)
@@ -344,8 +344,8 @@ class OxfordPetsClassifier:
         with open('model_metadata.json', 'w') as f:
             json.dump(metadata, f, indent=2)
         
-        print("   ✅ Model kaydedildi")
-        print("   ✅ Metadata kaydedildi")
+        print("   Model kaydedildi")
+        print("   Metadata kaydedildi")
     
     def predict_single_image(self, image_path):
         """Tek resim tahmini"""
@@ -382,7 +382,7 @@ class OxfordPetsClassifier:
 # ===== PRODUCTION PIPELINE =====
 def create_production_pipeline():
     """Production pipeline oluştur"""
-    print("🏭 PRODUCTION PIPELINE BAŞLATILIYOR")
+    print(" PRODUCTION PIPELINE BAŞLATILIYOR")
     print("=" * 60)
     
     # 1. Model oluştur
@@ -409,22 +409,22 @@ def create_production_pipeline():
     # 6. Model kaydet
     classifier.save_model("oxford_pets_production.h5")
     
-    print("\n✅ Production pipeline hazır!")
+    print("\n Production pipeline hazır!")
     return classifier
 
 if __name__ == "__main__":
     # Production model oluştur
     classifier = create_production_pipeline()
     
-    print("\n🎯 PRODUCTION MODEL ÖZELLİKLERİ:")
+    print("\n PRODUCTION MODEL ÖZELLİKLERİ:")
     print("=" * 40)
-    print("✅ İki aşamalı eğitim (Transfer Learning + Fine-tuning)")
-    print("✅ Data augmentation")
-    print("✅ Early stopping ve learning rate scheduling")
-    print("✅ Batch normalization")
-    print("✅ Dropout regularization")
-    print("✅ Comprehensive evaluation")
-    print("✅ Model checkpointing")
-    print("✅ Metadata saving")
-    print("✅ Single image prediction")
-    print("✅ Production-ready architecture") 
+    print(" İki aşamalı eğitim (Transfer Learning + Fine-tuning)")
+    print(" Data augmentation")
+    print(" Early stopping ve learning rate scheduling")
+    print(" Batch normalization")
+    print(" Dropout regularization")
+    print("  Comprehensive evaluation")
+    print("  Model checkpointing")
+    print("  Metadata saving")
+    print("  Single image prediction")
+    print("  Production-ready architecture") 
