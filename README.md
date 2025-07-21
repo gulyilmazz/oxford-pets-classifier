@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Oxford-IIIT Pet Dataset: Transfer Learning & Production Pipeline
 
 
