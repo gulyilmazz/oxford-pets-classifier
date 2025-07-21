@@ -28,7 +28,11 @@ dataset/
 .vscode/
 .idea/
 *.log
+*.json
 
 # Geçici dosyalar
 *.tmp
-*.bak 
+*.bak
+
+# Model metadata dosyası
+model_metadata.json 
