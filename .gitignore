@@ -1,0 +1,34 @@
+# Python cache ve derleme dosyaları
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Model ağırlıkları ve büyük dosyalar
+*.h5
+*.keras
+*.ckpt
+*.tflite
+*.pb
+*.safetensors
+
+# Dataset ve veri klasörleri
+data/
+dataset/
+*.zip
+*.tar
+*.tar.gz
+
+# Jupyter notebook checkpointleri
+.ipynb_checkpoints/
+
+# IDE ve sistem dosyaları
+.DS_Store
+.env
+.vscode/
+.idea/
+*.log
+
+# Geçici dosyalar
+*.tmp
+*.bak 
