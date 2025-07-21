@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Oxford-IIIT Pet Dataset: Transfer Learning & Production Pipeline
 
 
@@ -78,3 +79,6 @@ image.png
 
 ## Sonuç
 Bu proje, transfer learning modellerinin karşılaştırılması, production için optimize edilmiş bir pipeline ve modern web arayüzü ile gerçek hayata uygun bir pet sınıflandırıcı örneğidir. Daha iyi sonuçlar için veri ön işleme, augmentation ve hiperparametre optimizasyonu yapılmalıdır. 
+=======
+# oxford-pets-classifier
+>>>>>>> 24551bcc2b1b08aa23970959df6f86f48de86a1f
