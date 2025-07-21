@@ -1,8 +1,0 @@
-{
-  "transfer_learning_epochs": 10,
-  "fine_tuning_epochs": 5,
-  "final_val_accuracy": 61.23,
-  "model_params": 2628709,
-  "img_size": 224,
-  "num_classes": 37
-}
