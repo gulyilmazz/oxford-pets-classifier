@@ -28,7 +28,7 @@ dataset/
 .vscode/
 .idea/
 *.log
-*.jsonı
+*.json
 
 # Geçici dosyalar
 *.tmp
